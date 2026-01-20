@@ -11,7 +11,7 @@ app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "https://aillustrator-frontend.vercel.app/"
+        "https://aillustrator-frontend.vercel.app"
         ],
     allow_credentials=True,
     allow_methods=["*"],
