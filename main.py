@@ -13,7 +13,7 @@ app.add_middleware(
     allow_origins=[
         "https://aillustrator-frontend.vercel.app"
         ],
-    allow_credentials=True,
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -60,7 +60,10 @@ async def stream_notes(prompt: str) -> AsyncGenerator[str, None]:
 # ✅ Streaming endpoint
 @app.post("/generate-stream")
 async def generate_stream(req: GenerateRequest):
-    return StreamingResponse(
+    response = StreamingResponse(
         stream_notes(req.prompt),
         media_type="text/plain"
     )
+
+    response.headers["Access-Control-Allow-Origin"] = "https://aillustrator-frontend.vercel.app"
+    return response
